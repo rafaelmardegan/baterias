@@ -1,0 +1,198 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
+html{
+  font-family: 'Gill Sans', 'Gill Sans MT', calibri, 'Trebuchet MS', sans-serif;
+
+}
+body{
+  background: linear-gradient(to right, #FFFFFF , #FFE5B9);
+ 
+  font-family: 'Gill Sans', 'Gill Sans MT', calibri, 'Trebuchet MS', sans-serif;
+
+
+
+}
+h2{
+  font-family: 'Sacramento', cursive;
+  font-size: 42px;
+}
+  .container-fluid{
+	padding: 10px;
+  
+
+}
+.container{
+  padding: 10px;
+}
+
+.form{
+		box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+              	0 2px 2px rgba(0,0,0,0.12), 
+              	0 4px 4px rgba(0,0,0,0.12), 
+             	0 8px 8px rgba(0,0,0,0.12),
+             	0 16px 16px rgba(0,0,0,0.12);
+}
+.btnForm{
+  background-color: #EB8020;
+  color: white;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+              0 2px 2px rgba(0,0,0,0.12), 
+              0 4px 4px rgba(0,0,0,0.12), 
+              0 8px 8px rgba(0,0,0,0.12),
+              0 16px 16px rgba(0,0,0,0.12);
+}
+.btnForm:hover{
+  background-color: #FF8D31;
+  color:white;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.12), 
+              0 4px 4px rgba(0,0,0,0.12), 
+              0 7px 7px rgba(0,0,0,0.12), 
+              0 12px 12px rgba(0,0,0,0.12),
+              0 24px 24px rgba(0,0,0,0.12);
+}
+.btn-alterar{
+  background-color: #EB8020;
+  cursor:pointer;
+}
+.btn-alterar:hover{
+  background-color: #FF8D31;
+}
+.input-group-text{
+  background-color: #EB8020;
+  color: white;
+}
+.titulo{
+  text-shadow: #737373 0.2em 0.3em 0.2em;
+  font-size: 40px;
+
+}
+
+.navbar{
+	border-radius: 10px;
+	background: linear-gradient(90deg, rgba(255,196,128,1) 0%, rgba(255,224,193,1) 44%, rgba(255,254,251,1) 100%);
+    
+
+	color:#242531;
+	font-size: 24px;
+	text-align: center;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+              0 2px 2px rgba(0,0,0,0.12), 
+              0 4px 4px rgba(0,0,0,0.12), 
+             	0 8px 8px rgba(0,0,0,0.12),
+              0 16px 16px rgba(0,0,0,0.12);
+
+}
+
+table{
+	text-align: center;
+
+}
+
+.table-striped >  tbody{
+	background-color: #FFEDD1;
+
+}
+.pago{
+  background-color: #4BBD19;
+  color:white;
+}
+.acao{
+	padding: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+div.tooltips {
+  position: relative;
+  display: inline;
+  cursor: pointer;
+}
+div.tooltips span.t {
+  position: absolute;
+  width:140px;
+  color: #FFFFFF;
+  background: #178BFF;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 10px;
+}
+div.tooltips span.t:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #178BFF;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+div:hover.tooltips span.t {
+  visibility: visible;
+  opacity: 0.9;
+  top: 30px;
+  left: 50%;
+  margin-left: -72px;
+  z-index: 999;
+}
+
+#pag{
+  padding-left: 40px;
+  border:solid thin #A6A6A6;
+  border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+                0 1px 1px rgba(0,0,0,0.12), 
+                0 4px 4px rgba(0,0,0,0.12), 
+                0 4px 4px rgba(0,0,0,0.12),
+                0 8px 8px rgba(0,0,0,0.12);
+  background-color: #EB8020;
+  color:white;
+
+}
+.pag{
+  font-weight: bold;
+}
+footer{
+  color: #EB8020;
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+}
+/*#dev{
+  font-family: 'Sacramento', cursive;
+}*/
+
+/* Other styles */
+
+
+@media  (max-width: 1247px) {
+  img {
+    width: 90px;
+    height: 90px;
+  
+  }
+}
+@media  (max-width: 1179px) {
+  img {
+    width: 50px;
+    height: 50px;
+  
+  }
+}
+@media  (max-width: 1140px) {
+  img {
+    width: 0px;
+  
+  }
+}
+@media  (max-width: 820px) {
+  .titulo {
+    font-size: 24px;
+  
+  }
+}
