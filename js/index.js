@@ -10,7 +10,7 @@ function check(){
 }
 
 $(document).ready(function() {
-	$("#form").hide();
+
 	$("#mostrarForm").click(function(){
 		$("#form").toggle('fast');
 	});
@@ -29,10 +29,8 @@ $(document).ready(function() {
             }  
         });
 
-
-
     $('#tabela').DataTable( {
-      
+        "responsive": true,
        "bJQueryUI": true,
        "oLanguage": {
        		"sProcessing":   "Processando...",
@@ -63,16 +61,7 @@ $(document).ready(function() {
         
     });
 
-            $('select').change(function(){
-                $(".btn-pgto").css("color", "white");
-                $(".btn-alterar").css("color", "white");
-            })
-        
-            $(".btn-pgto").css("color", "white");
-            $(".btn-alterar").css("color", "white");
-            
-       
-
+   
 	    $(".salvar").click(function(){
 
             Swal.fire({
@@ -109,23 +98,11 @@ $(document).ready(function() {
                }
             );
 	   })
-     
-            // $("#pag").css("background-color", "green");
-           
-     
+               
         $(".custom-checkbox").change(function(){
             check();
         });
         check();
 
-
-            
-
-
-
 });
 
-
-// var dados = {
-//                 data: {nome: nome, telefone: telefone}
-//             };

@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Baterias</title>
+    <title>Fernando Baterias</title>
      
     <link href="./cdn/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="./cdn/icons/font/css/open-iconic-foundation.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
-
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="./cdn/datatables/datatables.css">
+    <link rel="stylesheet" href="./cdn/datatables/DataTables/css/responsive.dataTables.css">
     <link rel="stylesheet" href="./cdn/sweetalert2/css/sweetalert2.css">
    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet"> 
@@ -32,7 +33,7 @@
                       </center>
                       
                     </strong><h2 >Fernando Baterias</h2>
-                  <img src="bat" width="160" height="130" alt="">
+                  <img src="bat.png" width="160" height="130" alt="">
 
                 </nav>
             </div>
@@ -46,45 +47,45 @@
       <div class="container form" id="form">
         <div class="form-row">
           
-        <div class="col-6">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="cliente">Cliente</label>
             <input type="text" class="form-control" id="cliente" >
 
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-sm-4">
         <div class="form-group">
           <label for="telefone">Telefone</label>
           <input type="text" class="form-control" id="telefone">
         </div>
           </div>
-        <div class="col-2" id="pag" >
+        <div class="col-sm-2" id="pag" >
         <div class="form-group" >
           <label for="Pagamento" class="pag">Pagamento</label>
-<div class="custom-control custom-checkbox mr-sm-2">
-        <input  type="checkbox" class="custom-control-input check" id="customControlAutosizing">
+<div class="custom-control custom-checkbox mr-sm-2" >
+        <input  type="checkbox" class="custom-control-input check" id="customControlAutosizing" >
         <label class="custom-control-label" id="labelCheck" for="customControlAutosizing">PAGO</label>
       </div>
         </div>
           </div>
         </div>
         <div class="form-row">
-          <div class="col-4">
+          <div class="col-sm-4">
             <div class="form-group">
               <label for="numeroPlaca">Número da placa</label>
               <input type="text" class="form-control" id="numeroPlaca">
             </div>
             
           </div>
-          <div class="col-4">
+          <div class="col-sm-4">
             <div class="form-group">
               <label for="dataRetirada">Data da retirada</label>
               <input type="date" class="form-control" id="dataRetirada">
             </div>
             
           </div>
-          <div class="col-4">
+          <div class="col-sm-4">
             <div class="form-group">
               <label for="valor">Valor</label>
 
@@ -105,138 +106,138 @@
         <button type="button" class="btn btn-block btnForm salvar">Salvar</button>                      
       </div>
       <div class="container-fluid form">
-        <table id="tabela" class="table table-striped" >
+        <table id="tabela" class="table display responsive nowrap table-striped" >
         <thead>
             <tr>
-                <th>Data entrada</th>
-                <th>Cliente</th>
+               
+                <th data-priority="1" style="width: auto">Cliente</th>
                 <th>Telefone</th>
-                <th>Número da placa</th>
-                <th>Data da retirada</th>
-                <th>Valor</th>
-                <th>Pagamento</th>
-                <th>Alterar</th>
+                <th data-priority="2" style="width: auto">Número da placa</th>
+                <th  style="width: auto">Data da retirada</th>
+                <th  style="width: auto">Valor</th>
+                <th  style="width: auto">Pagamento</th>
+                <th  style="width: auto">Editar</th>
             </tr>
         </thead>
         <tbody>
           <tr>
-                <td>01/01/2020</td>           
+                         
                 <td>Rafael Mardegan</td>
                 <td>996085899</td>
-                <td>5112</td>
+                <td>P5112</td>
                 <td>04/01/2020</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
           <tr>
-                <td>29/12/2019</td>
+                
                 <td>Gabriel Macedo</td>
                 <td>999566847</td>
                 <td>845</td>
                 <td>02/01/2020</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-success btn-sm btn-pgto">Pago</a></td>
+                <td><a class="btn btn-sm btn-pago">Pago</a></td>
                 <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
           <tr>
-                <td>02/01/2020</td>           
+                           
                 <td>Cristiano Paiva</td>
                 <td>996544771</td>
                 <td>8597</td>
                 <td>06/01/2020</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-success btn-sm btn-pgto">Pago</a></td>
+                <td><a class="btn btn-sm btn-pago">Pago</a></td>
                 <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
           <tr>
-                <td>26/12/2019</td>
+               
                 <td>Eduardo Rosa</td>
                 <td>996544114</td>
                 <td>1145</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>      
           <tr>
-                <td>01/01/2020</td>           
+                        
                 <td>Everton Viana</td>
                 <td>999855447</td>
                 <td>8997</td>
                 <td>03/01/2020</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                     <tr>
-                <td>01/01/2020</td>           
+                   
                 <td>Lucas Kolba</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                               <tr>
-                <td>01/01/2020</td>           
+                      
                 <td>Juca</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                               <tr>
-                <td>01/01/2020</td>           
+                      
                 <td>Juliano</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                     <tr>
-                <td>01/01/2020</td>           
+                       
                 <td>Joãozinho</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                               <tr>
-                <td>01/01/2020</td>           
+                        
                 <td>Zé pequeno</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>
                               <tr>
-                <td>01/01/2020</td>           
+                   
                 <td>Jurupitan</td>
                 <td>999996355</td>
                 <td>2551</td>
                 <td>31/12/2019</td>
                 <td>R$ 30,00</td>
-                <td><a class="btn btn-danger btn-sm btn-pgto">Pendente</a></td>
+                <td><a class="btn btn-sm btn-pendente">Pendente</a></td>
                 <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
 
           </tr>                     
@@ -258,6 +259,7 @@
     <script src="./cdn/mask/mask.js"></script>
     <script src="./cdn/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="./cdn/datatables/datatables.js"></script>
+    <script src="./cdn/datatables/DataTables/js/dataTables.responsive.js"></script>
     <script src="./cdn/sweetalert2/js/sweetalert2.js"></script>
     <script src="./js/index.js"></script>
 

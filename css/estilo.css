@@ -31,6 +31,9 @@ h2{
              	0 8px 8px rgba(0,0,0,0.12),
              	0 16px 16px rgba(0,0,0,0.12);
 }
+#form{
+  display: none;
+}
 .btnForm{
   background-color: #EB8020;
   color: white;
@@ -52,6 +55,7 @@ h2{
 .btn-alterar{
   background-color: #EB8020;
   cursor:pointer;
+  color:white !important;
 }
 .btn-alterar:hover{
   background-color: #FF8D31;
@@ -91,9 +95,13 @@ table{
 	background-color: #FFEDD1;
 
 }
-.pago{
-  background-color: #4BBD19;
-  color:white;
+.btn-pago{
+  background-color: #28a745;
+  color:white !important;
+}
+.btn-pendente{
+  background-color: #dc3545;
+  color:white !important;
 }
 .acao{
 	padding: 0px;
@@ -138,7 +146,7 @@ div:hover.tooltips span.t {
 }
 
 #pag{
-  padding-left: 40px;
+  text-align: center;
   border:solid thin #A6A6A6;
   border-radius: 10px;
     box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
