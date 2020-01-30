@@ -91,17 +91,26 @@ table{
 
 }
 
+
 .table-striped >  tbody{
 	background-color: #FFEDD1;
 
 }
-.btn-pago{
+.btn-verde{
   background-color: #28a745;
   color:white !important;
+  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
 }
-.btn-pendente{
+.btn-vermelho{
   background-color: #dc3545;
   color:white !important;
+  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
 }
 .acao{
 	padding: 0px;
@@ -145,7 +154,8 @@ div:hover.tooltips span.t {
   z-index: 999;
 }
 
-#pag{
+#pag, #emp{
+  height: 90%;
   text-align: center;
   border:solid thin #A6A6A6;
   border-radius: 10px;
@@ -156,11 +166,13 @@ div:hover.tooltips span.t {
                 0 8px 8px rgba(0,0,0,0.12);
   background-color: #EB8020;
   color:white;
+  font-weight: bold;
 
 }
-.pag{
-  font-weight: bold;
+.salvar{
+  margin-top: 10px;
 }
+
 footer{
   color: #EB8020;
   font-family: 'Caveat', cursive;
@@ -181,26 +193,31 @@ footer{
 @media  (max-width: 1247px) {
   img {
     width: 90px;
-    height: 90px;
+    height: 31px;
   
   }
 }
 @media  (max-width: 1179px) {
   img {
     width: 50px;
-    height: 50px;
+    height: 17px;
   
   }
 }
-@media  (max-width: 1140px) {
-  img {
-    width: 0px;
-  
-  }
-}
+
 @media  (max-width: 820px) {
-  .titulo {
+  .titulo, h2 {
     font-size: 24px;
   
+  }
+}
+@media  (max-width: 375px) {
+  .titulo {
+    font-size: 12px;
+  
+  }
+  img{
+    width: 55px;
+    height: 19px;
   }
 }

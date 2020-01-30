@@ -2,17 +2,27 @@
 function check(){
     if ($(".check").is(':checked')) {
         $("#pag").css("background-color", "#28a745"); 
-        $("#labelCheck").html("PAGO");
+        $(".lbPag").html("PAGO");
     }else{
         $("#pag").css("background-color", "#dc3545"); 
-        $("#labelCheck").html("PENDENTE");
+        $(".lbPag").html("PENDENTE");
+    } 
+}
+function checkEmp(){
+    if ($(".checkEmp").is(':checked')) {
+        $("#emp").css("background-color", "#28a745"); 
+        $(".lbEmp").html("SIM");
+    }else{
+        $("#emp").css("background-color", "#dc3545"); 
+        $(".lbEmp").html("NÃO");
     } 
 }
 
 $(document).ready(function() {
 
 	$("#mostrarForm").click(function(){
-		$("#form").toggle('fast');
+		$("#form").slideToggle(400);
+
 	});
 	$("#valor").mask('000000000000000.00' , { reverse : true});
 	$("#telefone").mask("(99) 9999-9999?9")
@@ -78,7 +88,7 @@ $(document).ready(function() {
     		var nome = $("#nome").val();
     		var telefone = $("#telefone").val();
     		var numeroPlaca = $("#numeroPlaca").val();
-    		var dataRetirada = $("#dataRetirada").val();
+    		var dataRetirada = $("#dataEntrada").val();
     		var valor = $("#valor").val();
     		var retirado = false;
     		var dados = {
@@ -99,10 +109,17 @@ $(document).ready(function() {
             );
 	   })
                
-        $(".custom-checkbox").change(function(){
+        $(".pag").change(function(){
             check();
+         
+        });
+                $(".emp").change(function(){
+          
+            checkEmp();
         });
         check();
+        checkEmp();
+
 
 });
 
