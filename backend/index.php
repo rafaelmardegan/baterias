@@ -7,36 +7,84 @@
   mysql_connect($DB_host,$DB_login ,$DB_pass) or die (mysql_error());
   mysql_select_db($DB_db) or die (mysql_error()); 
 
-  
 
-  
-  if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  	
+  switch ($_POST['funcao']) {
+  	case 'listar':
+  		
+  		listar();
+  		
+  		break;
+  	case 'inserir':
+  		
+  		inserir();
+  		
+  		break;
+  	case 'buscarId':
+  		
+  		buscarId();
+  		
+  		break;
+  	case 'editar':
+  		
+  		editar();
+  		
+  		break;
+  	default:
+		echo "***ACESSO RESTRITO***";
+		// listar();
+  		break;
+  }
+
+
+  function listar(){
   	$listar = mysql_query("SELECT * FROM carregamentos");
-  	$registros = array();
+  	$registros['data'];
+  	$cont = 0;
   	while ($dados = mysql_fetch_array($listar)) {
-  		$registro = array(
+  		
+  		$registro  = array(
 		'cliente' => $dados[cliente],
 		'telefone' => $dados[telefone],
 		'numeroPlaca' => $dados[numeroPlaca],
 		'pagamento' => $dados[pagamento],
 		'dataEntrada' => $dados[dataEntrada],
-		'retirada' => $dados[retirada],
+		'id' => $dados[id],
+		// 'retirada' => $dados[retirada],
 		'emprestimo' => $dados[emprestimo]);
 
-		array_push($registros, $registro);
+
+		$registros[$cont] = $registro;
+		$cont++;
   	}
 
 	
 	echo json_encode($registros);
+  }
+
+  function buscarId(){
+  	$id = $_POST['id'];
+  	$listar = mysql_query("SELECT * FROM carregamentos where id = $id ");
+  	$registro;
+  	while ($dados = mysql_fetch_array($listar)) {
+  		
+  		$registro  = array(
+		'cliente' => $dados[cliente],
+		'telefone' => $dados[telefone],
+		'numeroPlaca' => $dados[numeroPlaca],
+		'pagamento' => $dados[pagamento],
+		'dataEntrada' => $dados[dataEntrada],
+		'id' => $dados[id],
+		// 'retirada' => $dados[retirada],
+		'emprestimo' => $dados[emprestimo]);
+
+  	}
+
 	
+	echo json_encode($registro);
   }
-  elseif ($_POST['funcao'] == "editar"){
-  	# code...
-  }
-  elseif( $_POST['funcao'] == "inserir"){
-  	
-	$cliente = $_POST['cliente'];
+
+  function inserir(){
+  	$cliente = $_POST['cliente'];
 	$telefone = $_POST['telefone'];
  	$numeroPlaca = $_POST['numeroPlaca'];
     $dataEntrada = $_POST['dataEntrada'];

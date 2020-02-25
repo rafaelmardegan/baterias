@@ -1,26 +1,94 @@
 
-function check(){
-    if ($(".check").is(':checked')) {
-        $("#pag").css("background-color", "#28a745"); 
-        $(".lbPag").html("PAGO");
-    }else{
-        $("#pag").css("background-color", "#dc3545"); 
-        $(".lbPag").html("PENDENTE");
-    } 
+var lista = [];
+var a = "oi";
+var response;
+var i;
+var url = "backend/index7.php";
+function btEditar(p){
+
+    $.post(
+        url, 
+        {funcao: "buscarId", id: p},
+        function(respEditar,status)
+        {
+            responseEditar = jQuery.parseJSON(respEditar);
+
+            // swal.fire(
+
+            //     "Editar", 
+            //     "Cliente: "+ responseEditar.cliente + "<br>Placa: " + responseEditar.numeroPlaca
+
+
+            //     ,
+            //     "success").then((result) => {
+            //       if (result.value) {
+            //         document.location.reload(true);
+            //     }
+            // }); 
+  document.getElementById('cliente').value = responseEditar.cliente;
+  document.getElementsByClassName('check').checked = true;          
+  // document.getElementById('checkEmp').checked = responseEditar.emprestimo; 
+  document.getElementById('telefone').value = responseEditar.telefone;    
+  document.getElementById('numeroPlaca').value = responseEditar.numeroPlaca;
+  document.getElementById('dataEntrada').value = responseEditar.dataEntrada;    
+   
+  var target_offset = $(".form").offset();
+  var target_top = target_offset.top;
+  $('html, body').animate({ scrollTop: target_top }, 400);
+  $("#form").show(400);
+
+
+
+
+        }
+            );
+
 }
-function checkEmp(){
-    if ($(".checkEmp").is(':checked')) {
-        $("#emp").css("background-color", "#28a745"); 
-        $(".lbEmp").html("SIM");
-    }else{
-        $("#emp").css("background-color", "#dc3545"); 
-        $(".lbEmp").html("NÃO");
-    } 
-}
-function datatable(){
-     $('#tabela').DataTable( {
+function dados(){
+    $.post( url,{funcao: "listar"}, function( data ) {
+   response = jQuery.parseJSON(data);
+    var pendente = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
+    var pago = '<a class="btn btn-sm btn-verde">Pago</a>';
+    var nao = '<a class="btn btn-sm btn-vermelho">Não</a>';
+    var sim = '<a class="btn btn-sm btn-verde">Sim</a>';
+
+    
+    // console.log(response);
+
+  for ( i = 0; i< response.length; i++) {
+        var emprestimo;
+        var pagamento;
+      if (response[i].emprestimo == 1) {
+        emprestimo = sim; 
+      }
+      else{
+        emprestimo = nao;
+      }
+      if (response[i].pagamento == 1) {
+            pagamento = pago;
+        } else {
+          pagamento = pendente;
+        } 
+        var sa = response[i].cliente; 
+      var registro = [response[i].cliente, response[i].telefone, response[i].numeroPlaca, response[i].dataEntrada, emprestimo, pagamento, "<a class='btn  btn-sm btn-alterar' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>"];
+      lista[i] = registro;
+  }
+  
+      $('#tabela').DataTable( {
         "responsive": true,
        "bJQueryUI": true,
+
+       "data":lista,
+"columns": [
+        { 0: 'Cliente' },
+        { 1: 'Telefone' },
+        { 2: 'Numero da Placa' },
+        { 3: 'Data da entrada' },
+        { 4: 'Empréstimo' },
+        { 5: 'Pagamento' },
+        { 6: 'Editar' }
+
+    ],
        "oLanguage": {
             "sProcessing":   "Processando...",
             "sLengthMenu":   "Mostrar _MENU_ registros",
@@ -40,8 +108,28 @@ function datatable(){
         }
 
 
-        
-    });
+});
+});
+
+} 
+ 
+function check(){
+    if ($(".check").is(':checked')) {
+        $("#pag").css("background-color", "#28a745"); 
+        $(".lbPag").html("PAGO");
+    }else{
+        $("#pag").css("background-color", "#dc3545"); 
+        $(".lbPag").html("PENDENTE");
+    } 
+}
+function checkEmp(){
+    if ($(".checkEmp").is(':checked')) {
+        $("#emp").css("background-color", "#28a745"); 
+        $(".lbEmp").html("SIM");
+    }else{
+        $("#emp").css("background-color", "#dc3545"); 
+        $(".lbEmp").html("NÃO");
+    } 
 }
 
 $(document).ready(function() {
@@ -50,60 +138,25 @@ $(document).ready(function() {
 		$("#form").slideToggle(400);
 
 	});
-    var pendente = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
-    var pago = '<a class="btn btn-sm btn-verde">Pendente</a>';
 
-	$("#valor").mask('000000000000000.00' , { reverse : true});
-	$("#telefone").mask("(99) 9999-9999?9")
-        .focusout(function (event) {  
-            var target, phone, element;  
-            target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
-            phone = target.value.replace(/\D/g, '');
-            element = $(target);  
-            element.unmask();  
-            if(phone.length > 10) {  
-                element.mask("(99) 99999-999?9");  
-            } else {  
-                element.mask("(99) 9999-9999?9");  
-            }  
-        });
+	// $("#telefone").mask("(99) 9999-9999?9")
+ //        .focusout(function (event) {  
+ //            var target, phone, element;  
+ //            target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
+ //            phone = target.value.replace(/\D/g, '');
+ //            element = $(target);  
+ //            // element.unmask();  
+ //            if(phone.length > 10) {  
+ //                element.mask("(99) 99999-999?9");  
+ //            } else {  
+ //                element.mask("(99) 9999-9999?9");  
+ //            }  
+ //        });
 
-       $.get("backend/index.php",function(data, status){
-    var lista = jQuery.parseJSON(data);
 
-        lista.forEach(obj => {
-                $("tbody").append("<tr>")
-                // console.log("___________")
-        Object.entries(obj).forEach(([key, value]) => {
-            // console.log(` ${value}`);
-            $("tr").append(`<td> ${value}</td>`);
-        });
-                $("td").append("</tr>")
-                // console.log("-----------")
+    dados();
+       
 
-           
-
-    });
-
-   })
-
-   
-
-   // $.get("backend/index.php",function(data, status){
-   //  var lista = jQuery.parseJSON(data);
-
-   //      lista.forEach(obj => {
-   //              $("tbody").append("<tr>")
-   //      Object.entries(obj).forEach(([key, value]) => {
-   //          console.log(` ${value}`);
-   //          $("tbody").append(`<td> ${value}</td>`);
-   //      });
-   //              $("tbody").append("</tr>")
-           
-
-   //  });
-   //  // console.log(lista);
-   // })
         $(".salvar").click(function(){
 
             // Swal.fire({
@@ -126,7 +179,7 @@ $(document).ready(function() {
             var emprestimo = $(".checkEmp").is(':checked');       
 
             $.post(
-                "backend/index.php", 
+                url, 
                 {funcao: "inserir", cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
                function(response,status)
                {
@@ -158,7 +211,8 @@ $(document).ready(function() {
                         "Cliente: " + obj.cliente + "<br>Placa: " + obj.numeroPlaca + "<br>Pagamento: " + labelPagamento + "<br>Empréstimo: " + labelEmprestimo,
                         "success").then((result) => {
                       if (result.value) {
-                        document.location.reload(true);
+                        document.location.reload(false);
+                        // dados();
                       }
                     }); 
 
@@ -176,7 +230,7 @@ $(document).ready(function() {
             check();
          
         });
-                $(".emp").change(function(){
+        $(".emp").change(function(){
           
             checkEmp();
         });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,8 @@
            
         </div>
     </div>
+
+
 
     <div class="container-fluid">
       <button class="btn btnForm" id="mostrarForm" type="button"><span class='fi-plus'></span> Registrar bateria</button>
@@ -106,6 +108,7 @@
           Salvar
         </button>                      
       </div>
+
       <div class="container-fluid form">
         <table id="tabela" class="table display responsive nowrap table-striped" >
         <thead>
@@ -120,134 +123,9 @@
                 <th data-priority="6">Editar</th>
             </tr>
         </thead>
-        <tbody>
-         <!--  <tr>
-                         
-                <td>Rafael Mardegan</td>
-                <td>996085899</td>
-                <td>P5112</td>
-                <td>04/01/2020</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-          <tr>
-                
-                <td>Gabriel Macedo</td>
-                <td>999566847</td>
-                <td>845</td>
-                <td>02/01/2020</td>
-                <td><a class="btn btn-sm btn-vermelho">Não</a></td>
-                <td><a class="btn btn-sm btn-verde">Pago</a></td>
-                <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-          <tr>
-                           
-                <td>Cristiano Paiva</td>
-                <td>996544771</td>
-                <td>8597</td>
-                <td>06/01/2020</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-verde">Pago</a></td>
-                <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-          <tr>
-               
-                <td>Eduardo Rosa</td>
-                <td>996544114</td>
-                <td>1145</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-vermelho">Não</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn  btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>      
-          <tr>
-                        
-                <td>Everton Viana</td>
-                <td>999855447</td>
-                <td>8997</td>
-                <td>03/01/2020</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                    <tr>
-                   
-                <td>Lucas Kolba</td>
-                <td>999996355</td>
-                <td>2551</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-vermelho">Não</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                              <tr>
-                      
-                <td>Juca</td>
-                <td>999996355</td>
-                <td>2651</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar" ><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                              <tr>
-                      
-                <td>Juliano</td>
-                <td>999996355</td>
-                <td>2558</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-vermelho">Não</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                    <tr>
-                       
-                <td>Joãozinho</td>
-                <td>999996355</td>
-                <td>2554</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                              <tr>
-                        
-                <td>Zé pequeno</td>
-                <td>999996355</td>
-                <td>4251</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-vermelho">Não</a></td>               
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>
-                              <tr>
-                   
-                <td>Jurupitan</td>
-                <td>999996355</td>
-                <td>5251</td>
-                <td>31/12/2019</td>
-                <td><a class="btn btn-sm btn-verde">Sim</a></td>
-                <td><a class="btn btn-sm btn-vermelho">Pendente</a></td>
-                <td><a class="btn btn-sm btn-alterar"><span class='fi-pencil'></span></a></td>
-
-          </tr>                      -->
-
-
-          </tbody>
+                 
         </table>
       </div>
-      
   <footer>
     <center>
       Desenvolvido por <a href="https://www.instagram.com/mardebrahma/" target="blank" id="dev">Rafael Mardegan
