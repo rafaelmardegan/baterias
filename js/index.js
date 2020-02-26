@@ -26,7 +26,8 @@ function btEditar(p){
             //     }
             // }); 
   document.getElementById('cliente').value = responseEditar.cliente;
-  document.getElementsByClassName('check').checked = true;          
+  // document.getElementsByClassName('check').checked = true; 
+  $("#customControlAutosizingEmprestimo").prop('checked', true);         
   // document.getElementById('checkEmp').checked = responseEditar.emprestimo; 
   document.getElementById('telefone').value = responseEditar.telefone;    
   document.getElementById('numeroPlaca').value = responseEditar.numeroPlaca;
