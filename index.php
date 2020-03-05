@@ -9,16 +9,12 @@
     <link href="./cdn/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="./cdn/icons/font/css/open-iconic-foundation.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="./cdn/datatables/datatables.css">
     <link rel="stylesheet" href="./cdn/datatables/DataTables/css/responsive.dataTables.css">
     <link rel="stylesheet" href="./cdn/sweetalert2/css/sweetalert2.css">
    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet"> 
-    
-
-
 </head>
   <body >
     <div class="row-fluid side">
@@ -47,9 +43,10 @@
 
 
     <div class="container-fluid">
-      <button class="btn btnForm" id="mostrarForm" type="button"><span class='fi-plus'></span> Registrar bateria</button>
+      <button class="btn btnForm" id="mostrarForm" title="Registrar um nova bateria para carregar" type="button"><span class='fi-plus'></span> Novo carregamento</button>
     </div>    
       <div class="container form" id="form">
+        <div class="container tituloEditar " id="esconder">INSERINDO NOVO CARREGAMENTO</div>
         <div class="form-row">
           
         <div class="col-sm-6">
@@ -85,13 +82,13 @@
           </div>
           <div class="col-sm-4">
           <div class="form-group">
-            <label for="telefone">Data de entrada</label>
+            <label for="dataEntrada">Data de entrada</label>
             <input type="date" class="form-control" id="dataEntrada">
           </div>
             </div>
           <div class="col-sm-2" id="emp" >
           <div class="form-group" >
-            <label for="Pagamento" class="pag">Empréstimo de bateria</label>
+            <label for="emprestimo" class="pag">Empréstimo de bateria</label>
           <div class="custom-control custom-checkbox emp mr-sm-2" >
           <input  type="checkbox" class="custom-control-input checkEmp" id="customControlAutosizingEmprestimo" >
           <label class="custom-control-label lbEmp" id="labelCheck" for="customControlAutosizingEmprestimo">Não</label>
@@ -106,21 +103,63 @@
             <path d="M2 20 L12 28 30 4" />
           </svg>
           Salvar
-        </button>                      
+        </button>
+        <div class="form-row row-fim esconder"> 
+          <div class="col-sm-12 col-fim">
+            <h4>Retirada de Bateria</h4>            
+          </div>
+          <div class="col-sm"></div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <label for="dataSaida">Data de saída</label>
+            <input type="date" class="form-control" id="dataSaida">
+          </div>
+            </div>
+            <div class="col-sm-2" id="finaliza">
+              <div class="form-group" >
+                <label for="final" class="pag">Finalizar</label>
+                <div class="custom-control custom-checkbox fim mr-sm-2" >
+                  <input  type="checkbox" class="custom-control-input checkFinal" id="customControlAutosizingFinal" >
+                  <label class="custom-control-label lbFim" id="labelCheck" for="customControlAutosizingFinal">Não</label>
+                </div>
+              </div>
+            </div>
+          <div class="col-sm"></div>
+
+        </div>
+        <!-- Botões salvar e cancelar - Edição -->
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-block btnForm salvarEditar esconder">
+              <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 38" width="28" height="28" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M2 20 L12 28 30 4" />
+              </svg>
+              Salvar
+            </button>   
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-block btnForm cancelar esconder" >
+              <span class='fi-x'>
+              Cancelar
+            </button> 
+          </div>
+        </div>                      
       </div>
 
       <div class="container-fluid form">
         <table id="tabela" class="table display responsive nowrap table-striped" >
         <thead>
             <tr>
-               
+                <th data-priority="9" >id</th>
+                <th  data-priority="2">Data da entrada</th>
                 <th data-priority="1" >Cliente</th>
-                <th  data-priority="7">Telefone</th>
-                <th data-priority="2" >Número da placa</th>
-                <th  data-priority="3">Data da entrada</th>
+                <th  data-priority="8">Telefone</th>
+                <th data-priority="3" >Número da placa</th>
                 <th  data-priority="4">Empréstimo</th>
                 <th data-priority="5">Pagamento</th>
-                <th data-priority="6">Editar</th>
+                <th data-priority="7">Data da retirada</th>
+                <th data-priority="6">Ação</th>
+                
             </tr>
         </thead>
                  

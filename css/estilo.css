@@ -34,7 +34,30 @@ h2{
 #form{
   display: none;
 }
+.esconder{
+  display:none;
+}
+.tituloEditar{
+  display:none;
+  color:#EB8020;
+ background-color: #E4E4E4;
+ margin-bottom: 5px;
+ border-radius: 10px;
+ display: flex;
+justify-content: center;
+flex-wrap: wrap;
+font-size: 18px;
+padding: 0;
+
+animation: fundo 2s;
+}
+
+.tituloEditar > .cliente{
+   font-weight: bold;
+   color:#14AF81;
+}
 .btnForm{
+  margin-top: 10px;
   background-color: #EB8020;
   color: white;
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
@@ -56,6 +79,17 @@ h2{
   background-color: #EB8020;
   cursor:pointer;
   color:white !important;
+}
+.col-fim{
+  color: #FF8D31;
+  text-align: center;
+}
+.row-fim{
+  border:solid thin;
+  border-color: #FF8D31;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
 }
 .btn-alterar:hover{
   background-color: #FF8D31;
@@ -154,7 +188,8 @@ div:hover.tooltips span.t {
   z-index: 999;
 }
 
-#pag, #emp{
+#pag, #emp, #finaliza{
+
   height: 90%;
   text-align: center;
   border:solid thin #A6A6A6;
@@ -169,8 +204,8 @@ div:hover.tooltips span.t {
   font-weight: bold;
 
 }
-.salvar{
-  margin-top: 10px;
+pre{
+  height: 0px;
 }
 
 footer{
@@ -183,13 +218,8 @@ footer{
   position: fixed;
   text-align: center;
 }
-/*#dev{
-  font-family: 'Sacramento', cursive;
-}*/
 
-/* Other styles */
-
-.switch {
+/*.switch {
   position: relative;
   display: inline-block;
   width: 120px;
@@ -239,7 +269,7 @@ input:checked + .slider:before {
 }
 
 /*------ ADDED CSS ---------*/
-.slider:after
+/*.slider:after
 {
  content:'PENDENTE';
  color: white;
@@ -255,8 +285,8 @@ input:checked + .slider:before {
 input:checked + .slider:after
 {  
   content:'PAGO';
-}
-
+}*/
+*/
 @media  (max-width: 1247px) {
   img {
     width: 90px;
@@ -286,5 +316,10 @@ input:checked + .slider:after
   img{
     width: 55px;
     height: 19px;
+  }
+}
+@keyframes fundo{
+  0%{
+    background-color: #808080;
   }
 }

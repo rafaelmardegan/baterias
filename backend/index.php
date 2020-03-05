@@ -47,7 +47,7 @@
 		'telefone' => $dados[telefone],
 		'numeroPlaca' => $dados[numeroPlaca],
 		'pagamento' => $dados[pagamento],
-		'dataEntrada' => $dados[dataEntrada],
+		'dataEntrada' => data($dados[dataEntrada]),
 		'id' => $dados[id],
 		// 'retirada' => $dados[retirada],
 		'emprestimo' => $dados[emprestimo]);
@@ -106,7 +106,9 @@
 
 	echo json_encode($registro);
   }
-  
+    function data($data){
+    return date("d/m/Y", strtotime($data));
+}
   
 
  
