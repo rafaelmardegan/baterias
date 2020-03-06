@@ -132,26 +132,26 @@ function dados(){
           cliente = response[i].cliente;
         }
       var btEditar = "<a class='btn  btn-sm btn-alterar' title='Finalizar ou editar este carregamento' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>";
-      var registro = [response[i].id, response[i].dataEntrada, cliente, response[i].telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar];
+      var registro = [cliente, response[i].dataEntrada, response[i].telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
       lista[i] = registro;
   }
   
   $('#tabela').DataTable( {
     "responsive": true,
     "bJQueryUI": true,
-    "order": [[ 0, "desc" ]],
+    // "order": [[ 8, "desc" ]],
 
     "data":lista,
     "columns": [
-    { 0: 'Id', visible: false },
+    { 0: 'Cliente' },
     { 1: 'Data da entrada' },
-    { 2: 'Cliente' },
-    { 3: 'Telefone' },
-    { 4: 'Numero da Placa' },
-    { 5: 'Empréstimo' },
-    { 6: 'Pagamento' },
-    { 7: 'Data da retirada' },
-    { 8: 'Editar' }
+    { 2: 'Telefone' },
+    { 3: 'Numero da Placa' },
+    { 4: 'Empréstimo' },
+    { 5: 'Pagamento' },
+    { 6: 'Data da retirada' },
+    { 7: 'Editar' },
+    { 8: 'Id', visible: false }
 
     ],
     "oLanguage": {
@@ -215,53 +215,73 @@ $(document).ready(function() {
   
   $(".salvar").click(function(){
 
-    var cliente = $("#cliente").val();
-    var telefone = $("#telefone").val();
-    var numeroPlaca = $("#numeroPlaca").val();
-    var dataEntrada = $("#dataEntrada").val();
-    var pagamento = $(".check").is(':checked');
-    var emprestimo = $(".checkEmp").is(':checked');       
+    var formOk = true;
+    $('.validar').each(function(){
+      if($(this).val() == "" || $(this).val() == null){
+        formOk = false;
+      }
+    }); 
 
-    $.post(
-      url, 
-      {funcao: "inserir", cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
-      function(response,status)
-      {
+    if (formOk==false) {
+      Swal.fire(
 
-        var obj = jQuery.parseJSON(response);
-        var labelPagamento;
-        var labelEmprestimo;
+            "", 
+            "Preencha os campos obrigatórios",
+            "info")
 
-        if (obj.pagamento == 'true') {
-          labelPagamento = '<a class="btn btn-sm btn-verde">Pago</a>';
-          obj.pagamento = 1;
-        }
-        else{
-          labelPagamento = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
-          obj.pagamento = 0;
+      
+    } else {
 
-        }
-        if (obj.emprestimo == 'true') {
-          labelEmprestimo = '<a class="btn btn-sm btn-verde">Sim</a>';
-          obj.emprestimo = 1;
-        }
-        else{
-          labelEmprestimo = '<a class="btn btn-sm btn-vermelho">Não</a>';
-          obj.emprestimo = 0;
-        }
-        swal.fire(
-          "Bateria Registrada!", 
-          "Cliente: " + obj.cliente + "<br>Placa: " + obj.numeroPlaca + "<br>Pagamento: " + labelPagamento + "<br>Empréstimo: " + labelEmprestimo,
-          "success").
+      var cliente = $("#cliente").val();
+      var telefone = $("#telefone").val();
+      var numeroPlaca = $("#numeroPlaca").val();
+      var dataEntrada = $("#dataEntrada").val();
+      var pagamento = $(".check").is(':checked');
+      var emprestimo = $(".checkEmp").is(':checked');       
+
+      $.post(
+        url, 
+        {funcao: "inserir", cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
+        function(response,status)
+        {
+
+          var obj = jQuery.parseJSON(response);
+          var labelPagamento;
+          var labelEmprestimo;
+
+          if (obj.pagamento == 'true') {
+            labelPagamento = '<a class="btn btn-sm btn-verde">Pago</a>';
+            obj.pagamento = 1;
+          }
+          else{
+            labelPagamento = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
+            obj.pagamento = 0;
+
+          }
+          if (obj.emprestimo == 'true') {
+            labelEmprestimo = '<a class="btn btn-sm btn-verde">Sim</a>';
+            obj.emprestimo = 1;
+          }
+          else{
+            labelEmprestimo = '<a class="btn btn-sm btn-vermelho">Não</a>';
+            obj.emprestimo = 0;
+          }
+          swal.fire(
+            "Bateria Registrada!", 
+            "Cliente: " + obj.cliente + "<br>Placa: " + obj.numeroPlaca + "<br>Pagamento: " + labelPagamento + "<br>Empréstimo: " + labelEmprestimo,
+            "success").
           then((result) => {
-              if (result.value) {
-                document.location.reload(false);
+            if (result.value) {
+              document.location.reload(false);
 
-              }
+            }
           }); 
 
-      }
+        }
         );
+    }
+
+
 
   })
 

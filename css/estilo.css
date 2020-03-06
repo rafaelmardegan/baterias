@@ -123,6 +123,7 @@ animation: fundo 2s;
 table{
 	text-align: center;
 
+
 }
 
 
@@ -311,7 +312,11 @@ input:checked + .slider:after
 @media  (max-width: 375px) {
   .titulo {
     font-size: 12px;
-  
+
+  }
+  table{
+      max-width: 360px !important;
+
   }
   img{
     width: 55px;

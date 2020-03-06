@@ -51,9 +51,11 @@
           
         <div class="col-sm-6">
           <div class="form-group">
+            <form  class="was-validated">
             <label for="cliente">Cliente</label>
-            <input type="text" class="form-control" id="cliente" >
-
+            <input required type="text" class="form-control validar" id="cliente" >
+            <div class="invalid-feedback">(campo obrigatório)</div>
+          </form>
           </div>
         </div>
         <div class="col-sm-4">
@@ -75,15 +77,20 @@
         <div class="form-row">
           <div class="col-sm-6">
             <div class="form-group">
+               <form  class="was-validated">
               <label for="cliente">Número da placa</label>
-              <input type="text" class="form-control" id="numeroPlaca" >
-
+              <input required type="text" class="form-control validar" id="numeroPlaca" >
+              <div class="invalid-feedback">(campo obrigatório)</div>
+              </form>
             </div>
           </div>
           <div class="col-sm-4">
           <div class="form-group">
+           <form  class="was-validated">
             <label for="dataEntrada">Data de entrada</label>
-            <input type="date" class="form-control" id="dataEntrada">
+            <input required type="date" class="form-control validar" id="dataEntrada">
+            <div class="invalid-feedback">(campo obrigatório)</div>
+            </form>
           </div>
             </div>
           <div class="col-sm-2" id="emp" >
@@ -150,15 +157,15 @@
         <table id="tabela" class="table display responsive nowrap table-striped" >
         <thead>
             <tr>
-                <th data-priority="9" >id</th>
-                <th  data-priority="2">Data da entrada</th>
                 <th data-priority="1" >Cliente</th>
+                <th  data-priority="2">Data da entrada</th>
                 <th  data-priority="8">Telefone</th>
                 <th data-priority="3" >Número da placa</th>
                 <th  data-priority="4">Empréstimo</th>
                 <th data-priority="5">Pagamento</th>
                 <th data-priority="7">Data da retirada</th>
                 <th data-priority="6">Ação</th>
+                <th data-priority="9" >id</th>
                 
             </tr>
         </thead>
