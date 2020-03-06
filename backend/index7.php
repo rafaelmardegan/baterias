@@ -42,6 +42,11 @@
   		break;
   }
 }
+elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+  $init = mysqli_query($conexao, "SELECT mostrarFinalizados from parametro where id = 1");
+  $init = mysqli_fetch_array($init);
+  echo (int )$init['mostrarFinalizados'];
+}
 else{
 	echo "NO REQUEST";
   // listar($conexao);

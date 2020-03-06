@@ -1,4 +1,5 @@
 
+var parametro = -1;
 var lista = [];
 var a = "oi";
 var response;
@@ -102,7 +103,13 @@ function editar(){
         );
 }
 
-
+function inicializar(){
+    $.get(url, function(data){
+ 
+       console.log(data);
+       dados();
+    });
+}
 function dados(){
     $.post( url,{funcao: "listar"}, function( data ) {
    response = jQuery.parseJSON(data);
@@ -207,11 +214,20 @@ function checkFinal(){
 }
 
 $(document).ready(function() {
+inicializar();
+  $("#switch-shadow").click(function(){
+    if ($("#switch-shadow").is(':checked')) {
+      console.log("ligado")
+    } else {
+      console.error("desligdo")
+      
+    }
+  })
 
 	$("#mostrarForm").click(function(){
 	 $("#form").slideToggle(400);
 	});
-  dados();
+  // dados();
   
   $(".salvar").click(function(){
 
@@ -224,12 +240,9 @@ $(document).ready(function() {
 
     if (formOk==false) {
       Swal.fire(
-
             "", 
             "Preencha os campos obrigatórios",
-            "info")
-
-      
+            "info")  
     } else {
 
       var cliente = $("#cliente").val();

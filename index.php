@@ -43,8 +43,17 @@
 
 
     <div class="container-fluid">
-      <button class="btn btnForm" id="mostrarForm" title="Registrar um nova bateria para carregar" type="button"><span class='fi-plus'></span> Novo carregamento</button>
-    </div>    
+      <div class="row">
+        <div class="col" style=" display:flex">
+          <button class="btn btnForm" id="mostrarForm" title="Registrar um nova bateria para carregar" type="button"><span class='fi-plus'></span> Novo carregamento</button>         
+        </div>
+        <div class="col colSwitch" >
+          <label id="labelSwitch" title="Mostra os carregamentos já finalizados" for="">Mostrar finalizados</label>
+          <input id="switch-shadow" class="switch switch--shadow" type="checkbox" >
+          <label for="switch-shadow" title="Mostra os carregamentos já finalizados"></label>
+        </div>
+      </div>
+    </div>   
       <div class="container form" id="form">
         <div class="container tituloEditar " id="esconder">INSERINDO NOVO CARREGAMENTO</div>
         <div class="form-row">
