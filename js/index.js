@@ -51,6 +51,13 @@ function btEditar(p){
 }
 function editar(){
 
+  if (!validaCamposInserir()) {
+    Swal.fire(
+      "", 
+      "Preencha os campos obrigatórios",
+      "info")  
+  } else {
+
     var cliente = $("#cliente").val();
     var telefone = $("#telefone").val();
     var numeroPlaca = $("#numeroPlaca").val();
@@ -60,8 +67,7 @@ function editar(){
     var dataSaida = $("#dataSaida").val();
     var finaliza = $(".checkFinal").is(':checked');
 
-
-      $.post(
+    $.post(
       url, 
       {funcao: "editar", id: responseEditar.id, dataSaida: dataSaida, finaliza: finaliza, cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
       function(response,status)
@@ -89,29 +95,29 @@ function editar(){
           obj.emprestimo = 0;
         }
         swal.fire(
-          "Registro Editado!", 
+          "Alteração salva com sucesso!", 
           "Cliente: " + obj.cliente + "<br>Placa: " + obj.numeroPlaca + "<br>Pagamento: " + labelPagamento + "<br>Empréstimo: " + labelEmprestimo,
           "success").
-          then((result) => {
-              if (result.value) {
-                document.location.reload(false);
+        then((result) => {
+          if (result.value) {
+            document.location.reload(false);
 
-              }
-          }); 
+          }
+        }); 
 
       }
-        );
+      );
+  }
 }
 
 function inicializar(){
     $.get(url, function(data){
- 
-       console.log(data);
-       dados();
+       dados(data);
+       $("#switch-shadow").prop('checked', parseInt(data));
     });
 }
-function dados(){
-    $.post( url,{funcao: "listar"}, function( data ) {
+function dados(parametro){
+    $.post( url,{funcao: "listar", parametro: parametro}, function( data ) {
    response = jQuery.parseJSON(data);
     var pendente = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
     var pago = '<a class="btn btn-sm btn-verde" >Pago</a>';
@@ -121,6 +127,7 @@ function dados(){
   for ( i = 0; i< response.length; i++) {
         var emprestimo;
         var pagamento;
+        var telefone;
       if (response[i].emprestimo == 1) {
         emprestimo = sim; 
       }
@@ -138,15 +145,20 @@ function dados(){
         } else {
           cliente = response[i].cliente;
         }
+        if (response[i].telefone == '') {
+          telefone = "N/I";
+        } else {
+          telefone = response[i].telefone;
+        }
       var btEditar = "<a class='btn  btn-sm btn-alterar' title='Finalizar ou editar este carregamento' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>";
-      var registro = [cliente, response[i].dataEntrada, response[i].telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
+      var registro = [cliente, response[i].dataEntrada, telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
       lista[i] = registro;
   }
   
   $('#tabela').DataTable( {
     "responsive": true,
     "bJQueryUI": true,
-    // "order": [[ 8, "desc" ]],
+    "order": [[ 8, "desc" ]],
 
     "data":lista,
     "columns": [
@@ -213,13 +225,53 @@ function checkFinal(){
     } 
 }
 
+function validaCamposInserir(){
+    var formOk = true;
+    $('.validar').each(function(){
+      if($(this).val() == "" || $(this).val() == null){
+        formOk = false;
+      }
+      
+    }); 
+    return formOk;
+}
+function preenchecheckFinal(){
+ 
+  if($("#dataSaida").val()!=''){
+    $("#customControlAutosizingFinal").prop('checked', 1);
+    checkFinal();
+
+  }
+  else{
+    $("#customControlAutosizingFinal").prop('checked', 0);
+    checkFinal();
+
+  }
+
+}
+
+
 $(document).ready(function() {
-inicializar();
+  
+  inicializar();
+
   $("#switch-shadow").click(function(){
     if ($("#switch-shadow").is(':checked')) {
-      console.log("ligado")
+      $.post(
+      url, 
+      {funcao: "setParametro", parametro: 1},
+      function(){
+      document.location.reload(false);
+      }
+        );
     } else {
-      console.error("desligdo")
+            $.post(
+      url, 
+      {funcao: "setParametro", parametro: 0},
+      function(){
+      document.location.reload(false);
+      }
+        );
       
     }
   })
@@ -227,18 +279,12 @@ inicializar();
 	$("#mostrarForm").click(function(){
 	 $("#form").slideToggle(400);
 	});
-  // dados();
   
   $(".salvar").click(function(){
 
-    var formOk = true;
-    $('.validar').each(function(){
-      if($(this).val() == "" || $(this).val() == null){
-        formOk = false;
-      }
-    }); 
+   
 
-    if (formOk==false) {
+    if (!validaCamposInserir()) {
       Swal.fire(
             "", 
             "Preencha os campos obrigatórios",
@@ -305,9 +351,6 @@ inicializar();
   $(".salvarEditar").click(function(){
     editar();
   
-
-
-
 
   })
                

@@ -32,7 +32,7 @@
                       </center>
                       
                     </strong><!-- <h2 >Fernando Baterias</h2> -->
-                  <img src="./imagens/bat.png" width="180" height="62"  alt="">
+                  <img src="./imagens/bat.png" id="img-bat" width="180" height="62"  alt="">
 
                 </nav>
             </div>
@@ -42,7 +42,7 @@
 
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="menu">
       <div class="row">
         <div class="col" style=" display:flex">
           <button class="btn btnForm" id="mostrarForm" title="Registrar um nova bateria para carregar" type="button"><span class='fi-plus'></span> Novo carregamento</button>         
@@ -62,7 +62,7 @@
           <div class="form-group">
             <form  class="was-validated">
             <label for="cliente">Cliente</label>
-            <input required type="text" class="form-control validar" id="cliente" >
+            <input required maxlength="40" type="text" class="form-control validar" id="cliente" >
             <div class="invalid-feedback">(campo obrigatório)</div>
           </form>
           </div>
@@ -70,7 +70,7 @@
         <div class="col-sm-4">
         <div class="form-group">
           <label for="telefone">Telefone</label>
-          <input type="text" class="form-control" id="telefone">
+          <input type="text" maxlength="30" class="form-control" id="telefone">
         </div>
           </div>
         <div class="col-sm-2" id="pag" >
@@ -128,14 +128,14 @@
           <div class="col-sm-2">
           <div class="form-group">
             <label for="dataSaida">Data de saída</label>
-            <input type="date" class="form-control" id="dataSaida">
+            <input type="date" class="form-control" onblur="preenchecheckFinal()" id="dataSaida">
           </div>
             </div>
             <div class="col-sm-2" id="finaliza">
               <div class="form-group" >
                 <label for="final" class="pag">Finalizar</label>
                 <div class="custom-control custom-checkbox fim mr-sm-2" >
-                  <input  type="checkbox" class="custom-control-input checkFinal" id="customControlAutosizingFinal" >
+                  <input disabled type="checkbox" class="custom-control-input checkFinal" id="customControlAutosizingFinal" >
                   <label class="custom-control-label lbFim" id="labelCheck" for="customControlAutosizingFinal">Não</label>
                 </div>
               </div>
@@ -183,8 +183,13 @@
       </div>
   <footer>
     <center>
-      Desenvolvido por <a href="https://www.instagram.com/mardebrahma/" target="blank" id="dev">Rafael Mardegan
-      </a>      
+      Desenvolvido por <a id="dev">Rafael Mardegan </a> - 
+      <a target="blank" href="https://www.instagram.com/mardebrahma/">
+        <img src="imagens/igg.png" title="Instagram" width="20" alt="">
+      </a>
+      <a target="blank" href="https://www.facebook.com/rafael.mardegan.3">
+        <img src="imagens/fb.png" title="Facebook" width="25" alt=""> 
+      </a> 
     </center>
   </footer>
     <script src="./cdn/axios/axios.min.js"></script>

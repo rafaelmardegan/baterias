@@ -7,12 +7,9 @@ body{
   background: linear-gradient(to right, #FFFFFF , #FFE5B9);
  
   font-family: 'Gill Sans', 'Gill Sans MT', calibri, 'Trebuchet MS', sans-serif;
-
-
-
 }
 h2{
-  font-family: 'Sacramento', cursive;
+  /*font-family: 'Sacramento', cursive;*/
   font-size: 42px;
 }
   .container-fluid{
@@ -34,8 +31,15 @@ h2{
 #form{
   display: none;
 }
+#menu{
+  border-bottom: solid thin;
+  border-bottom-color: #EB8020;
+}
 .esconder{
   display:none;
+}
+#dev{
+  color: blue;
 }
 .tituloEditar{
   display:none;
@@ -139,11 +143,6 @@ table{
 
 }
 
-
-.table-striped >  tbody{
-	background-color: #FFEDD1;
-
-}
 .btn-verde{
   background-color: #28a745;
   color:white !important;
@@ -193,7 +192,7 @@ footer{
   left: 0;
   bottom: 0;
   width: 100%;
-  position: fixed;
+  /*position: fixed;*/
   text-align: center;
 }
 /*botão switch*/
@@ -230,14 +229,14 @@ footer{
   right: 1px;
   background-color: #f1f1f1;
   border-radius: 60px;
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 .switch--shadow + label:after {
   width: 62px;
   background-color: #fff;
   border-radius: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 .switch--shadow:checked + label:before {
   background-color: #EB8020;
@@ -247,14 +246,14 @@ footer{
 }
 
 @media  (max-width: 1247px) {
-  img {
+  #img-bat {
     width: 90px;
     height: 31px;
   
   }
 }
 @media  (max-width: 1179px) {
-  img {
+  #img-bat {
     width: 50px;
     height: 17px;
   
@@ -283,7 +282,7 @@ footer{
       max-width: 360px !important;
 
   }
-  img{
+  #img-bat{
     width: 55px;
     height: 19px;
   }

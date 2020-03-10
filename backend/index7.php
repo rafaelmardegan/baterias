@@ -18,7 +18,7 @@
  switch ($_POST['funcao']) {
   	case 'listar':
   		
-  		listar($conexao);
+  		listar($conexao, $_POST['parametro']);
   		
   		break;
   	case 'inserir':
@@ -36,6 +36,11 @@
   		editar($conexao);
   		
   		break;
+    case 'setParametro':
+    
+      setParametro($conexao, $_POST['parametro']);
+
+      break;  
   	default:
 		echo "***ACESSO RESTRITO***";
 	
@@ -43,9 +48,7 @@
   }
 }
 elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
-  $init = mysqli_query($conexao, "SELECT mostrarFinalizados from parametro where id = 1");
-  $init = mysqli_fetch_array($init);
-  echo (int )$init['mostrarFinalizados'];
+  getParametro($conexao);
 }
 else{
 	echo "NO REQUEST";
@@ -53,11 +56,19 @@ else{
 }
 
 
-  function listar($conexao){
+  function listar($conexao, $parametro){
     $query1 = "SELECT * FROM carregamentos";
     $query2 = "SELECT * FROM carregamentos where retirada = 0 ";
 
-  	$listar = mysqli_query($conexao, $query1);
+    $listar = "";
+    if ($parametro == 0) {
+      $listar = mysqli_query($conexao, $query2);
+      
+    } else {
+      $listar = mysqli_query($conexao, $query1);
+      
+    }
+  	// $listar = mysqli_query($conexao, $query1);
   	$cont = 0;
   	while ($dados = mysqli_fetch_array($listar)) {
       $dataSaida = "N/I";
@@ -111,6 +122,7 @@ else{
   }
 
   function inserir($conexao){
+
     $cliente = $_POST['cliente'];
 	  $telefone = $_POST['telefone'];
  	  $numeroPlaca = $_POST['numeroPlaca'];
@@ -134,6 +146,18 @@ else{
 	echo json_encode($registro);
   }
   function editar($conexao){
+    $dataEntrada = '';
+    $dataSaida = '';
+
+    // if ($_POST['dataEntrada']=='') {
+    //   $dataEntrada = null;
+    // }
+    if ($_POST['dataSaida']=='') {
+      $dataSaida = "NULL";
+    }
+    else{
+      $dataSaida = "'".$_POST['dataSaida']."'";
+    }
 
     $cliente = $_POST['cliente'];
     $telefone = $_POST['telefone'];
@@ -142,11 +166,11 @@ else{
     $pagamento = $_POST['pagamento'];
     $emprestimo = $_POST['emprestimo'];
     $retirada = $_POST['finaliza'];
-    $dataSaida = $_POST['dataSaida'];
+    // $dataSaida = $_POST['dataSaida'];
     $id = $_POST['id'];
 
 
-   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = ' $numeroPlaca', dataEntrada = '$dataEntrada', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = '$dataSaida' where id = $id"); 
+   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = ' $numeroPlaca', dataEntrada = '$dataEntrada', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = $dataSaida where id = $id"); 
  
   $registro = array(
     'cliente' => $cliente,
@@ -159,6 +183,16 @@ else{
 
   echo json_encode($registro);
 
+  }
+
+  function getParametro($conexao){
+    $init = mysqli_query($conexao, "SELECT mostrarFinalizados from parametro where id = 1");
+    $init = mysqli_fetch_array($init);
+    echo (int )$init['mostrarFinalizados'];
+  }
+
+  function setParametro($conexao, $param){
+    $edit = mysqli_query($conexao, "UPDATE parametro set mostrarFinalizados = $param where id = 1");
   }
 
   function data($data){
