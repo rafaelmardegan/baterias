@@ -110,6 +110,28 @@ function editar(){
   }
 }
 
+function backup(){
+
+      $.post(
+      url, 
+      {funcao: "backup"},
+      function(response, status)
+      {
+        if (status == "success") {
+      Swal.fire(
+            "Backup gerado com sucesso!", 
+            "Backup gerado em C:/backupBaterias",
+            "success")  
+        }
+        else{
+                Swal.fire(
+            "Não foi possível gerar o backup", 
+            "",
+            "error")  
+        }
+      })
+}
+
 function inicializar(){
     $.get(url, function(data){
        dados(data);
@@ -282,7 +304,7 @@ $(document).ready(function() {
   
   $(".salvar").click(function(){
 
-   
+    
 
     if (!validaCamposInserir()) {
       Swal.fire(
@@ -290,7 +312,7 @@ $(document).ready(function() {
             "Preencha os campos obrigatórios",
             "info")  
     } else {
-
+      $(".salvar").attr('disabled', true);
       var cliente = $("#cliente").val();
       var telefone = $("#telefone").val();
       var numeroPlaca = $("#numeroPlaca").val();

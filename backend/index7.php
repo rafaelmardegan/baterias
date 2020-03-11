@@ -1,7 +1,7 @@
 <?php 
   $DB_host="localhost:3306";
   $DB_login="root";
-  $DB_pass="";
+  $DB_pass="fernandobaterias5";
   $DB_db="baterias";
   
 //php 7
@@ -40,7 +40,12 @@
     
       setParametro($conexao, $_POST['parametro']);
 
-      break;  
+      break;
+    case 'backup':
+      
+      backup($conexao);
+
+      break;    
   	default:
 		echo "***ACESSO RESTRITO***";
 	
@@ -49,6 +54,7 @@
 }
 elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
   getParametro($conexao);
+  // backup($conexao);
 }
 else{
 	echo "NO REQUEST";
@@ -193,6 +199,14 @@ else{
 
   function setParametro($conexao, $param){
     $edit = mysqli_query($conexao, "UPDATE parametro set mostrarFinalizados = $param where id = 1");
+  }
+
+  function backup($conexao){
+    $backupFile = "backupBaterias-" . date("Y-m-d") . ".sql";
+   
+  system("mysqldump  -uroot -pfernandobaterias5 baterias > C:/backupBaterias/$backupFile");
+
+
   }
 
   function data($data){

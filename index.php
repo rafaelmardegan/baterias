@@ -181,6 +181,9 @@
                  
         </table>
       </div>
+      <div class="container-fluid" id="container-backup">
+        <a  class="btn btn-sm btn-verde" onclick="backup()" style="cursor: pointer" title=""><span class='fi-cog'> Gerar backup</span></a>
+      </div>
   <footer>
     <center>
       Desenvolvido por <a id="dev">Rafael Mardegan </a> - 
