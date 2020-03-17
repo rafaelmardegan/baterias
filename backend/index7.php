@@ -9,7 +9,15 @@
  $conexao = mysqli_connect($DB_host,$DB_login ,$DB_pass);
  $x = mysqli_select_db($conexao, $DB_db);
 
- 
+require_once('PhpMailer/PHPMailer.php'); 
+require_once('PhpMailer/SMTP.php'); 
+require_once('PhpMailer/Exception.php'); 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	
@@ -155,9 +163,6 @@ else{
     $dataEntrada = '';
     $dataSaida = '';
 
-    // if ($_POST['dataEntrada']=='') {
-    //   $dataEntrada = null;
-    // }
     if ($_POST['dataSaida']=='') {
       $dataSaida = "NULL";
     }
@@ -172,11 +177,10 @@ else{
     $pagamento = $_POST['pagamento'];
     $emprestimo = $_POST['emprestimo'];
     $retirada = $_POST['finaliza'];
-    // $dataSaida = $_POST['dataSaida'];
     $id = $_POST['id'];
 
 
-   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = ' $numeroPlaca', dataEntrada = '$dataEntrada', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = $dataSaida where id = $id"); 
+   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = '$numeroPlaca', dataEntrada = '$dataEntrada', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = $dataSaida where id = $id"); 
  
   $registro = array(
     'cliente' => $cliente,
@@ -206,7 +210,42 @@ else{
    
   system("mysqldump  -uroot -pfernandobaterias5 baterias > C:/backupBaterias/$backupFile");
 
+  enviaEmail();
 
+  }
+
+  function enviaEmail(){
+
+    $mail = new PhpMailer(true);
+
+    try {
+      // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = 'rafael.bakups@gmail.com';
+      $mail->Password = 'sistemasBackup$89';
+      $mail->Port = 587;
+      $mail->setFrom('rafael.bakups@gmail.com');
+      $mail->addAddress('rafael.bakups@gmail.com');
+
+      $mail->Subject = "BACKUP SISTEMA DE CARREGAMENTO DE BATERIAS - ".date("d/m/Y");
+      $mail->Body = 'Segue em anexo o backup da base de dados do Sistema de Controle de Carregamento de Baterias';
+      $mail -> addAttachment ("C:/backupBaterias/backupBaterias-" . date("Y-m-d") . ".sql");
+      
+      if ($mail->send()) {
+
+        echo "Email enviado com sucesso!";
+
+      } else {
+
+        echo "Email NÃO enviado.";
+      }
+
+    } catch (Exception $e) {
+      echo "Erro ao enviar mensagem: {$mail->ErrorInfo}";
+
+    }
   }
 
   function data($data){

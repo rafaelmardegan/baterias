@@ -21,10 +21,20 @@ h2{
   padding: 10px;
 }
 
-#container-backup{
+.container-backup{
   text-align: right;
-}
+  margin-top:0;
+  padding-top: 0;
 
+}
+#label-backup{
+  color: #28a745;
+  font-weight: bold;
+  display:none;
+    margin-bottom: 0;
+  padding-bottom: 0;
+
+}
 .form{
 		box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
               	0 2px 2px rgba(0,0,0,0.12), 
@@ -154,6 +164,13 @@ table{
   padding-top: 0px;
   padding-bottom: 0px;
 
+}
+#btn-backup{
+    background-color: #EB8020;
+  color:white !important;
+  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .btn-vermelho{
   background-color: #dc3545;

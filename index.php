@@ -40,8 +40,6 @@
         </div>
     </div>
 
-
-
     <div class="container-fluid" id="menu">
       <div class="row">
         <div class="col" style=" display:flex">
@@ -54,6 +52,12 @@
         </div>
       </div>
     </div>   
+          <div class="container-fluid container-backup" id="label-backup">
+        <label ><img src="imagens/preloader.gif" width="50" alt=""> Gerando backup. Aguarde...</label>
+      </div>
+      <div class="container-fluid container-backup">
+        <button type="button"  class="btn btn-sm" id="btn-backup" title="Gera um backup da base de dados e envia por email" onclick="backup()" style="cursor: pointer" title=""><span class='fi-cog'> Gerar backup</span></button>
+      </div>
       <div class="container form" id="form">
         <div class="container tituloEditar " id="esconder">INSERINDO NOVO CARREGAMENTO</div>
         <div class="form-row">
@@ -114,12 +118,22 @@
 
         </div>
  
-        <button type="button" class="btn btn-block btnForm salvar">
-          <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 38" width="28" height="28" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M2 20 L12 28 30 4" />
-          </svg>
-          Salvar
-        </button>
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-block btnForm salvar">
+              <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 38" width="28" height="28" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M2 20 L12 28 30 4" />
+              </svg>
+              Salvar
+            </button>   
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-block btnForm cancelar" onclick="document.location.reload(true)" >
+              <span class='fi-x'>
+              Cancelar
+            </button> 
+          </div>
+        </div>   
         <div class="form-row row-fim esconder"> 
           <div class="col-sm-12 col-fim">
             <h4>Retirada de Bateria</h4>            
@@ -154,7 +168,7 @@
             </button>   
           </div>
           <div class="col">
-            <button type="button" class="btn btn-block btnForm cancelar esconder" >
+            <button type="button" class="btn btn-block btnForm cancelarEditar esconder" onclick="document.location.reload(true)" >
               <span class='fi-x'>
               Cancelar
             </button> 
@@ -181,9 +195,6 @@
                  
         </table>
       </div>
-      <div class="container-fluid" id="container-backup">
-        <a  class="btn btn-sm btn-verde" onclick="backup()" style="cursor: pointer" title=""><span class='fi-cog'> Gerar backup</span></a>
-      </div>
   <footer>
     <center>
       Desenvolvido por <a id="dev">Rafael Mardegan </a> - 
@@ -195,11 +206,9 @@
       </a> 
     </center>
   </footer>
-    <script src="./cdn/axios/axios.min.js"></script>
     <script src="./cdn/jquery/jquery-3.4.1.min.js"></script>
     <script src="./cdn/bootstrap-4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="./cdn/mask/mask.js"></script>
-    <script src="./cdn/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="./cdn/datatables/datatables.js"></script>
     <script src="./cdn/datatables/DataTables/js/dataTables.responsive.js"></script>
     <script src="./cdn/sweetalert2/js/sweetalert2.js"></script>

@@ -31,11 +31,11 @@ function btEditar(p){
           document.getElementById('dataEntrada').value = responseEditar.dataEntrada;
           document.getElementById('dataSaida').value = responseEditar.dataSaida;
 
-
           $(".tituloEditar").html("EDITANDO CARREGAMENTO - Cliente:<pre> </pre> <div class='cliente'> " + responseEditar.cliente + "</div>");
           $(".salvar").addClass('esconder');
+          $(".cancelar").addClass('esconder');
           $(".salvarEditar").removeClass('esconder');
-          $(".cancelar").removeClass('esconder');
+          $(".cancelarEditar").removeClass('esconder');
           $(".row-fim").removeClass('esconder');
 
 
@@ -56,7 +56,13 @@ function editar(){
       "", 
       "Preencha os campos obrigatórios",
       "info")  
-  } else {
+  }
+  else {
+    
+    $(".salvarEditar").attr('disabled', true);
+    $(".salvarEditar>svg").css('display', 'none');
+    $(".salvarEditar").html("<img src='imagens/preloader.gif' width='25'> Salvando...");
+
 
     var cliente = $("#cliente").val();
     var telefone = $("#telefone").val();
@@ -112,22 +118,32 @@ function editar(){
 
 function backup(){
 
+      $("#btn-backup").attr('disabled', true);
+      $("#label-backup").show('fast');
+
       $.post(
       url, 
       {funcao: "backup"},
       function(response, status)
       {
         if (status == "success") {
-      Swal.fire(
+          console.log(response)
+          Swal.fire(
             "Backup gerado com sucesso!", 
-            "Backup gerado em C:/backupBaterias",
-            "success")  
+            "Backup gerado em C:/backupBaterias<br>Enviado para o email: rafael.bakups@gmail.com",
+            "success")
+          $("#btn-backup").attr('disabled', false);
+          $("#label-backup").hide();
+
+
         }
         else{
-                Swal.fire(
+          Swal.fire(
             "Não foi possível gerar o backup", 
             "",
-            "error")  
+            "error") 
+          $("#btn-backup").attr('disabled', false);
+          $("#label-backup").hide();       
         }
       })
 }
@@ -139,82 +155,83 @@ function inicializar(){
     });
 }
 function dados(parametro){
+
     $.post( url,{funcao: "listar", parametro: parametro}, function( data ) {
-   response = jQuery.parseJSON(data);
-    var pendente = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
-    var pago = '<a class="btn btn-sm btn-verde" >Pago</a>';
-    var nao = '<a class="btn btn-sm btn-vermelho">Não</a>';
-    var sim = '<a class="btn btn-sm btn-verde">Sim</a>';
+          response = jQuery.parseJSON(data);
+          var pendente = '<a class="btn btn-sm btn-vermelho">Pendente</a>';
+          var pago = '<a class="btn btn-sm btn-verde" >Pago</a>';
+          var nao = '<a class="btn btn-sm btn-vermelho">Não</a>';
+          var sim = '<a class="btn btn-sm btn-verde">Sim</a>';
 
-  for ( i = 0; i< response.length; i++) {
-        var emprestimo;
-        var pagamento;
-        var telefone;
-      if (response[i].emprestimo == 1) {
-        emprestimo = sim; 
-      }
-      else{
-        emprestimo = nao;
-      }
-      if (response[i].pagamento == 1) {
-            pagamento = pago;
-        } else {
-          pagamento = pendente;
-        } 
-        var cliente;
-        if (response[i].retirada == 1) {
-          cliente = "<font color='red'>"+response[i].cliente+"</font>";
-        } else {
-          cliente = response[i].cliente;
+        for ( i = 0; i< response.length; i++) {
+              var emprestimo;
+              var pagamento;
+              var telefone;
+            if (response[i].emprestimo == 1) {
+              emprestimo = sim; 
+            }
+            else{
+              emprestimo = nao;
+            }
+            if (response[i].pagamento == 1) {
+                  pagamento = pago;
+              } else {
+                pagamento = pendente;
+              } 
+              var cliente;
+              if (response[i].retirada == 1) {
+                cliente = "<font color='red'>"+response[i].cliente+"</font>";
+              } else {
+                cliente = response[i].cliente;
+              }
+              if (response[i].telefone == '') {
+                telefone = "N/I";
+              } else {
+                telefone = response[i].telefone;
+              }
+            var btEditar = "<a class='btn  btn-sm btn-alterar' title='Finalizar ou editar este carregamento' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>";
+            var registro = [cliente, response[i].dataEntrada, telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
+            lista[i] = registro;
         }
-        if (response[i].telefone == '') {
-          telefone = "N/I";
-        } else {
-          telefone = response[i].telefone;
-        }
-      var btEditar = "<a class='btn  btn-sm btn-alterar' title='Finalizar ou editar este carregamento' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>";
-      var registro = [cliente, response[i].dataEntrada, telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
-      lista[i] = registro;
-  }
-  
-  $('#tabela').DataTable( {
-    "responsive": true,
-    "bJQueryUI": true,
-    "order": [[ 8, "desc" ]],
+        
+        $('#tabela').DataTable( {
+          "responsive": true,
+          "bJQueryUI": true,
+          "order": [[ 8, "desc" ]],
 
-    "data":lista,
-    "columns": [
-    { 0: 'Cliente' },
-    { 1: 'Data da entrada' },
-    { 2: 'Telefone' },
-    { 3: 'Numero da Placa' },
-    { 4: 'Empréstimo' },
-    { 5: 'Pagamento' },
-    { 6: 'Data da retirada' },
-    { 7: 'Editar' },
-    { 8: 'Id', visible: false }
+          "data":lista,
+          "columns": [
+          { 0: 'Cliente' },
+          { 1: 'Data da entrada' },
+          { 2: 'Telefone' },
+          { 3: 'Numero da Placa' },
+          { 4: 'Empréstimo' },
+          { 5: 'Pagamento' },
+          { 6: 'Data da retirada' },
+          { 7: 'Editar' },
+          { 8: 'Id', visible: false }
 
-    ],
-    "oLanguage": {
-      "sProcessing":   "Processando...",
-      "sLengthMenu":   "Mostrar _MENU_ registros",
-      "sZeroRecords":  "Não foram encontrados resultados",
-      "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-      "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
-      "sInfoFiltered": "",
-      "sInfoPostFix":  "",
-      "sSearch":       "Buscar:",
-      "sUrl":          "",
-      "oPaginate": {
-        "sFirst":    "Primeiro",
-        "sPrevious": "Anterior",
-        "sNext":     "Seguinte",
-        "sLast":     "Último"
-      }
-    }
+          ],
+          "oLanguage": {
+            "sProcessing":   "Processando...",
+            "sLengthMenu":   "Mostrar _MENU_ registros",
+            "sZeroRecords":  "Não foram encontrados resultados",
+            "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+            "sInfoFiltered": "",
+            "sInfoPostFix":  "",
+            "sSearch":       "Buscar:",
+            "sUrl":          "",
+            "oPaginate": {
+              "sFirst":    "Primeiro",
+              "sPrevious": "Anterior",
+              "sNext":     "Seguinte",
+              "sLast":     "Último"
+            }
+          }
 
 
-  });
+        });
 });
 
 } 
@@ -306,13 +323,17 @@ $(document).ready(function() {
 
     
 
-    if (!validaCamposInserir()) {
+    if (!validaCamposInserir()) {      
       Swal.fire(
             "", 
             "Preencha os campos obrigatórios",
             "info")  
     } else {
       $(".salvar").attr('disabled', true);
+      $(".salvar>svg").css('display', 'none');
+      $(".salvar").html("<img src='imagens/preloader.gif' width='25'> Salvando...");
+
+
       var cliente = $("#cliente").val();
       var telefone = $("#telefone").val();
       var numeroPlaca = $("#numeroPlaca").val();
@@ -366,10 +387,7 @@ $(document).ready(function() {
 
   })
 
-  $(".cancelar").click(function(){
-    document.location.reload(true);
 
-  });
   $(".salvarEditar").click(function(){
     editar();
   
