@@ -19,7 +19,7 @@ function btEditar(p){
           var p = parseInt(responseEditar.pagamento);
           var e = parseInt(responseEditar.emprestimo);
           var r = parseInt(responseEditar.retirada);
-
+          var a = responseEditar.amperagem;
           $("#customControlAutosizingEmprestimo").prop('checked', e);
           $("#customControlAutosizingPagamento").prop('checked', p);
           $("#customControlAutosizingFinal").prop('checked', r);
@@ -30,6 +30,11 @@ function btEditar(p){
           document.getElementById('numeroPlaca').value = responseEditar.numeroPlaca;
           document.getElementById('dataEntrada').value = responseEditar.dataEntrada;
           document.getElementById('dataSaida').value = responseEditar.dataSaida;
+          document.getElementById('marca').value = responseEditar.marca;
+          if (responseEditar.amperagem == 0) {
+            a = "";
+          }
+          document.getElementById('amperagem').value = a;
 
           $(".tituloEditar").html("EDITANDO CARREGAMENTO - Cliente:<pre> </pre> <div class='cliente'> " + responseEditar.cliente + "</div>");
           $(".salvar").addClass('esconder');
@@ -67,6 +72,8 @@ function editar(){
     var cliente = $("#cliente").val();
     var telefone = $("#telefone").val();
     var numeroPlaca = $("#numeroPlaca").val();
+    var marca = $("#marca").val();
+    var amperagem = $("#amperagem").val();
     var dataEntrada = $("#dataEntrada").val();
     var pagamento = $(".check").is(':checked');
     var emprestimo = $(".checkEmp").is(':checked');
@@ -75,7 +82,7 @@ function editar(){
 
     $.post(
       url, 
-      {funcao: "editar", id: responseEditar.id, dataSaida: dataSaida, finaliza: finaliza, cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
+      {funcao: "editar", id: responseEditar.id, dataSaida: dataSaida, finaliza: finaliza, cliente: cliente, marca:marca, amperagem:amperagem, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
       function(response,status)
       {
 
@@ -106,7 +113,7 @@ function editar(){
           "success").
         then((result) => {
           if (result.value) {
-            document.location.reload(false);
+            document.location.reload(true);
 
           }
         }); 
@@ -150,8 +157,8 @@ function backup(){
 
 function inicializar(){
     $.get(url, function(data){
-       dados(data);
        $("#switch-shadow").prop('checked', parseInt(data));
+       dados(data);
     });
 }
 function dados(parametro){
@@ -167,6 +174,8 @@ function dados(parametro){
               var emprestimo;
               var pagamento;
               var telefone;
+              var marca;
+              var amperagem;
             if (response[i].emprestimo == 1) {
               emprestimo = sim; 
             }
@@ -180,24 +189,37 @@ function dados(parametro){
               } 
               var cliente;
               if (response[i].retirada == 1) {
-                cliente = "<font color='red'>"+response[i].cliente+"</font>";
+                cliente = "<font color='red'>"+upperCase(response[i].cliente)+"</font>";
               } else {
-                cliente = response[i].cliente;
+                cliente = upperCase(response[i].cliente);
               }
               if (response[i].telefone == '') {
-                telefone = "N/I";
+                telefone = "-";
               } else {
                 telefone = response[i].telefone;
               }
+              if (response[i].marca == '') {
+                marca = "-";
+              } else {
+                marca = upperCase(response[i].marca);
+              }
+              if (response[i].amperagem == 0) {
+                amperagem = "-";
+              } else {
+                amperagem = response[i].amperagem+'Ah';
+              }                            
             var btEditar = "<a class='btn  btn-sm btn-alterar' title='Finalizar ou editar este carregamento' onclick=btEditar('"+response[i].id+"')><span class='fi-pencil'></span></a>";
-            var registro = [cliente, response[i].dataEntrada, telefone, response[i].numeroPlaca, emprestimo, pagamento, response[i].dataSaida, btEditar, response[i].id ];
+            var registro = [cliente, response[i].dataEntrada, telefone, response[i].numeroPlaca, emprestimo, pagamento, marca, amperagem, response[i].dataSaida, btEditar, response[i].id ];
             lista[i] = registro;
+            
         }
         
         $('#tabela').DataTable( {
           "responsive": true,
           "bJQueryUI": true,
-          "order": [[ 8, "desc" ]],
+          "pageLength": 30,
+          "lengthMenu":[[30,50,100,-1],["30", "50", "100", "Todos"]],
+          "order": [[ 10, "desc" ]],
 
           "data":lista,
           "columns": [
@@ -207,9 +229,11 @@ function dados(parametro){
           { 3: 'Numero da Placa' },
           { 4: 'Empréstimo' },
           { 5: 'Pagamento' },
-          { 6: 'Data da retirada' },
-          { 7: 'Editar' },
-          { 8: 'Id', visible: false }
+          { 6: 'Marca' },
+          { 7: 'Amperagem' },
+          { 8: 'Data da retirada' },
+          { 9: 'Editar' },
+          { 10: 'Id', visible: false }
 
           ],
           "oLanguage": {
@@ -235,7 +259,14 @@ function dados(parametro){
 });
 
 } 
- 
+ function upperCase(texto){
+  if (texto != "" || texto != null) {
+    var aux1 = texto.substring(0, 1).toUpperCase(); 
+    var aux2 = texto.substring(1, texto.length).toLowerCase();
+    texto = aux1.concat(aux2);
+  }
+  return texto;
+ }
 function check(){
     if ($(".check").is(':checked')) {
         $("#pag").css("background-color", "#28a745"); 
@@ -269,8 +300,7 @@ function validaCamposInserir(){
     $('.validar').each(function(){
       if($(this).val() == "" || $(this).val() == null){
         formOk = false;
-      }
-      
+      }     
     }); 
     return formOk;
 }
@@ -279,19 +309,16 @@ function preenchecheckFinal(){
   if($("#dataSaida").val()!=''){
     $("#customControlAutosizingFinal").prop('checked', 1);
     checkFinal();
-
   }
   else{
     $("#customControlAutosizingFinal").prop('checked', 0);
     checkFinal();
-
   }
-
 }
 
 
 $(document).ready(function() {
-  
+ 
   inicializar();
 
   $("#switch-shadow").click(function(){
@@ -310,8 +337,7 @@ $(document).ready(function() {
       function(){
       document.location.reload(false);
       }
-        );
-      
+        );      
     }
   })
 
@@ -320,8 +346,6 @@ $(document).ready(function() {
 	});
   
   $(".salvar").click(function(){
-
-    
 
     if (!validaCamposInserir()) {      
       Swal.fire(
@@ -336,14 +360,16 @@ $(document).ready(function() {
 
       var cliente = $("#cliente").val();
       var telefone = $("#telefone").val();
+      var marca = $("#marca").val();
+      var amperagem = $("#amperagem").val();
       var numeroPlaca = $("#numeroPlaca").val();
       var dataEntrada = $("#dataEntrada").val();
       var pagamento = $(".check").is(':checked');
-      var emprestimo = $(".checkEmp").is(':checked');       
-
+      var emprestimo = $(".checkEmp").is(':checked');   
+      // console.log(amperagem +" "+ marca)   
       $.post(
         url, 
-        {funcao: "inserir", cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, pagamento: pagamento, emprestimo: emprestimo},
+        {funcao: "inserir", cliente: cliente, telefone: telefone, numeroPlaca : numeroPlaca, dataEntrada: dataEntrada, marca: marca, amperagem: amperagem, pagamento: pagamento, emprestimo: emprestimo},
         function(response,status)
         {
 
@@ -382,16 +408,11 @@ $(document).ready(function() {
         }
         );
     }
-
-
-
   })
-
 
   $(".salvarEditar").click(function(){
     editar();
   
-
   })
                
         $(".pag").change(function(){

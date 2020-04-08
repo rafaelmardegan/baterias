@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
-
+// inserir($conexao);
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	
    
@@ -71,8 +71,8 @@ else{
 
 
   function listar($conexao, $parametro){
-    $query1 = "SELECT * FROM carregamentos";
-    $query2 = "SELECT * FROM carregamentos where retirada = 0 ";
+    $query1 = "SELECT * FROM carregamentos order by id desc";
+    $query2 = "SELECT * FROM carregamentos where retirada = 0 order by id desc ";
 
     $listar = "";
     if ($parametro == 0) {
@@ -85,7 +85,7 @@ else{
   	// $listar = mysqli_query($conexao, $query1);
   	$cont = 0;
   	while ($dados = mysqli_fetch_array($listar)) {
-      $dataSaida = "N/I";
+      $dataSaida = "-";
   		if ($dados['dataSaida'] != null) {
 
         $dataSaida = data($dados['dataSaida']);
@@ -94,7 +94,9 @@ else{
 		'cliente' => $dados['cliente'],
 		'telefone' => $dados['telefone'],
 		'numeroPlaca' => $dados['numeroPlaca'],
-		'pagamento' => $dados['pagamento'],
+    'pagamento' => $dados['pagamento'],
+    'marca' => $dados['marca'],
+		'amperagem' => $dados['amperagem'],
 		'dataEntrada' => data($dados['dataEntrada']),
 		'id' => $dados['id'],
 		'dataSaida' => $dataSaida,
@@ -123,6 +125,8 @@ else{
 		'telefone' => $dados['telefone'],
 		'numeroPlaca' => $dados['numeroPlaca'],
 		'pagamento' => $dados['pagamento'],
+    'marca' => $dados['marca'],
+    'amperagem' => $dados['amperagem'],
 		'dataEntrada' => $dados['dataEntrada'],
 		'id' => $dados['id'],
 		'retirada' => $dados['retirada'],
@@ -142,11 +146,13 @@ else{
  	  $numeroPlaca = $_POST['numeroPlaca'];
     $dataEntrada = $_POST['dataEntrada'];
 	  $pagamento = $_POST['pagamento'];
-	  $emprestimo = $_POST['emprestimo'];
+    $emprestimo = $_POST['emprestimo'];
+    $marca = $_POST['marca'];
+	  $amperagem = (int )$_POST['amperagem'];
 	  $retirada = 0;
 
-	 mysqli_query($conexao, "INSERT INTO carregamentos (cliente, telefone, numeroPlaca, dataEntrada, pagamento, emprestimo, retirada)
-		VALUES ('$cliente', '$telefone', '$numeroPlaca', '$dataEntrada', $pagamento, $emprestimo, $retirada)");
+	 mysqli_query($conexao, "INSERT INTO carregamentos (cliente, telefone, numeroPlaca, dataEntrada, marca, amperagem, pagamento, emprestimo, retirada)
+		VALUES ('$cliente', '$telefone', '$numeroPlaca', '$dataEntrada', '$marca', $amperagem, $pagamento, $emprestimo, $retirada)");
 
 	$registro = array(
 		'cliente' => $cliente,
@@ -176,11 +182,13 @@ else{
     $dataEntrada = $_POST['dataEntrada'];
     $pagamento = $_POST['pagamento'];
     $emprestimo = $_POST['emprestimo'];
+    $marca = $_POST['marca'];
+    $amperagem = $_POST['amperagem'];
     $retirada = $_POST['finaliza'];
     $id = $_POST['id'];
 
 
-   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = '$numeroPlaca', dataEntrada = '$dataEntrada', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = $dataSaida where id = $id"); 
+   mysqli_query($conexao, "UPDATE carregamentos set cliente = '$cliente', telefone = '$telefone', numeroPlaca = '$numeroPlaca', dataEntrada = '$dataEntrada', marca = '$marca', amperagem = '$amperagem', pagamento = $pagamento, emprestimo = $emprestimo, retirada = $retirada, dataSaida = $dataSaida where id = $id"); 
  
   $registro = array(
     'cliente' => $cliente,
@@ -228,6 +236,8 @@ else{
       $mail->Port = 587;
       $mail->setFrom('rafael.bakups@gmail.com');
       $mail->addAddress('rafael.bakups@gmail.com');
+      // $mail->setFrom('rafaelmardegan89@gmail.com');
+      // $mail->addAddress('rafaelmardegan89@gmail.com');
 
       $mail->Subject = "BACKUP SISTEMA DE CARREGAMENTO DE BATERIAS - ".date("d/m/Y");
       $mail->Body = 'Segue em anexo o backup da base de dados do Sistema de Controle de Carregamento de Baterias';

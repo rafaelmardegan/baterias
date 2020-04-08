@@ -28,7 +28,7 @@ h2{
 
 }
 #label-backup{
-  color: #28a745;
+  color: #4FA181;
   font-weight: bold;
   display:none;
     margin-bottom: 0;
@@ -55,10 +55,11 @@ h2{
 #dev{
   color: blue;
 }
+
 .tituloEditar{
   display:none;
   color:#EB8020;
- background-color: #E4E4E4;
+ background-color: #BEEAD9;
  margin-bottom: 5px;
  border-radius: 10px;
  display: flex;
@@ -130,8 +131,13 @@ animation: fundo 2s;
   color: white;
 }
 .titulo{
-  text-shadow: #737373 0.2em 0.3em 0.2em;
-  font-size: 40px;
+  /*color: #008179;*/
+  background:  -webkit-linear-gradient(right, #FB7700, #00867E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /*font-weight: bold;*/
+  /*text-shadow: #E2DDD9 0.2em 0.3em 0.2em;*/
+  font-size: 45px;
 
 }
 
@@ -154,9 +160,10 @@ animation: fundo 2s;
 table{
 	text-align: center;
 
-
 }
-
+table tr .odd:hover{
+  background:red !important;
+}
 .btn-verde{
   background-color: #28a745;
   color:white !important;
@@ -229,6 +236,7 @@ footer{
   cursor: pointer;
   outline: none;
   user-select: none;
+
 }
 .switch--shadow + label {
   padding: 2px;
@@ -252,9 +260,10 @@ footer{
   border-radius: 60px;
   transition: all 0.2s;
 }
+
 .switch--shadow + label:after {
   width: 62px;
-  background-color: #fff;
+  background-color: #F5F5F5;
   border-radius: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
@@ -310,6 +319,6 @@ footer{
 }
 @keyframes fundo{
   0%{
-    background-color: #808080;
+    background-color: #4FA181;
   }
 }

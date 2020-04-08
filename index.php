@@ -24,7 +24,7 @@
                     <strong>
                       <center>
                         <div class="titulo">
-                          Controle do carregamento de baterias
+                          CONTROLE DE CARGA
                         </div>
                         <div>
                           
@@ -32,7 +32,7 @@
                       </center>
                       
                     </strong><!-- <h2 >Fernando Baterias</h2> -->
-                  <img src="./imagens/bat.png" id="img-bat" width="180" height="62"  alt="">
+                  <img id="imgBat" src="./imagens/bat.png" id="img-bat" width="180" height="62"  alt="">
 
                 </nav>
             </div>
@@ -115,7 +115,21 @@
         </div>
           </div>
             </div>
-
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cliente">Marca</label>
+              <input type="text" class="form-control" id="marca">
+            </div>           
+          </div>  
+          <div class="col-sm-6">
+            <label for="cliente">Amperagem</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="amperagem">
+              <div class="input-group-append">
+                <span class="input-group-text">Ah</span>
+              </div>
+            </div>
+          </div>
         </div>
  
         <div class="row">
@@ -182,13 +196,15 @@
             <tr>
                 <th data-priority="1" >Cliente</th>
                 <th  data-priority="2">Data da entrada</th>
-                <th  data-priority="8">Telefone</th>
+                <th  data-priority="10">Telefone</th>
                 <th data-priority="3" >Número da placa</th>
                 <th  data-priority="4">Empréstimo</th>
                 <th data-priority="5">Pagamento</th>
-                <th data-priority="7">Data da retirada</th>
+                <th data-priority="7">Marca</th>
+                <th data-priority="8">Amperagem</th>
+                <th data-priority="9">Data da retirada</th>
                 <th data-priority="6">Ação</th>
-                <th data-priority="9" >id</th>
+                <th data-priority="11" >id</th>
                 
             </tr>
         </thead>
