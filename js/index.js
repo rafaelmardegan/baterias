@@ -404,7 +404,10 @@ $(document).ready(function() {
 
             }
           }); 
+          
+          // alert("Carregamento registrado!")
 
+          // document.location.reload(false);
         }
         );
     }

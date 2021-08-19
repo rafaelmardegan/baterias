@@ -80,7 +80,7 @@
         <div class="col-sm-2" id="pag" >
         <div class="form-group" >
           <label for="Pagamento" class="pag">Pagamento</label>
-<div class="custom-control custom-checkbox pag mr-sm-2" >
+          <div class="custom-control custom-checkbox divPag pag mr-sm-2" >
         <input  type="checkbox" class="custom-control-input check" id="customControlAutosizingPagamento" >
         <label class="custom-control-label lbPag" id="labelCheck" for="customControlAutosizingPagamento">PAGO</label>
       </div>
@@ -109,7 +109,7 @@
           <div class="col-sm-2" id="emp" >
           <div class="form-group" >
             <label for="emprestimo" class="pag">Empréstimo de bateria</label>
-          <div class="custom-control custom-checkbox emp mr-sm-2" >
+          <div class="custom-control custom-checkbox divEmp emp mr-sm-2" >
           <input  type="checkbox" class="custom-control-input checkEmp" id="customControlAutosizingEmprestimo" >
           <label class="custom-control-label lbEmp" id="labelCheck" for="customControlAutosizingEmprestimo">Não</label>
         </div>
@@ -134,7 +134,7 @@
  
         <div class="row">
           <div class="col">
-            <button type="button" class="btn btn-block btnForm salvar">
+            <button type="button" class="btn btn-block btnForm salvar" id="btnSalvar">
               <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 38" width="28" height="28" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <path d="M2 20 L12 28 30 4" />
               </svg>
